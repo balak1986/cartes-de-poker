@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_launcher"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$FibonacciFragment" >
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/imageButton2f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton1f"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/card_img"
+        android:onClick="showCard"
+        android:src="@drawable/fib_card2" />
+
+    <ImageButton
+        android:id="@+id/imageButton1f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/section_label"
+        android:layout_alignTop="@+id/section_label"
+        android:contentDescription="@string/card_img"
+        android:onClick="showCard"
+        android:src="@drawable/fib_card1" />
+
+    <ImageButton
+        android:id="@+id/imageButton3f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageButton2f"
+        android:contentDescription="@string/card_img"
+        android:onClick="showCard"
+        android:src="@drawable/fib_card3" />
+
+</RelativeLayout>
