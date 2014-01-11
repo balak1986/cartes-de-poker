@@ -1,29 +1,26 @@
 package in.boulevard.planningpoker;
 
+import in.boulevard.planningpoker.util.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.TextView;
+import android.widget.ImageView;
 
-public class DisplayCardActivity extends Activity {
+public class DisplayCardFullImageActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_display_card);
-		// get data from intent
+
 		Intent intent = getIntent();
-		Integer cardButtonViewId = intent.getIntExtra(
-				MainActivity.CARD_ID_MESSAGE, 125);
+		Integer cardFullImageUri = intent.getIntExtra(
+				Constants.CARD_FULL_IMAGE_ID, R.drawable.default_card);
 
-		// Create the text view
-		TextView textView = new TextView(this);
-		textView.setTextSize(40);
-		textView.setText(cardButtonViewId.toString());
+		ImageView img = new ImageView(this);
+		img.setImageResource(cardFullImageUri);
 
-		// Set the text view as the activity layout
-		setContentView(textView);
+		setContentView(img);
 	}
 
 	@Override

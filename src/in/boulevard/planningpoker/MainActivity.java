@@ -1,12 +1,7 @@
 package in.boulevard.planningpoker;
 
-import in.boulevard.planningpoker.card.DummyCardsFragment;
-import in.boulevard.planningpoker.card.EvenNumberCardsFragment;
-import in.boulevard.planningpoker.card.FibonacciCardsFragment;
-import in.boulevard.planningpoker.card.ManDaysCardsFragment;
-import in.boulevard.planningpoker.card.NumericCardsFragment;
-import in.boulevard.planningpoker.card.TShirtSizeCardsFragment;
 import in.boulevard.planningpoker.util.Constants;
+import in.boulevard.planningpoker.util.FactoryUtil;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +10,6 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.OnNavigationListener {
@@ -25,7 +19,6 @@ public class MainActivity extends FragmentActivity implements
 	 * current dropdown position.
 	 */
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
-	public static final String CARD_ID_MESSAGE = "card_id";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +47,7 @@ public class MainActivity extends FragmentActivity implements
 	public boolean onNavigationItemSelected(int position, long id) {
 		// When the given dropdown item is selected, show its contents in the
 		// container view.
-		Fragment fragment = createCardsFragment(position);
+		Fragment fragment = FactoryUtil.createCardsFragment(position);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 		return true;
@@ -85,31 +78,14 @@ public class MainActivity extends FragmentActivity implements
 
 	/** Called when the user clicks the card button */
 	public void showCard(View view) {
-		Button cardButton = (Button) view;
-		int viewId = cardButton.getId();
-		System.out.println(viewId);
-		Intent intent = new Intent(this, DisplayCardActivity.class);
-		intent.putExtra(CARD_ID_MESSAGE, viewId);
-		System.out.println(viewId);
-		startActivity(intent);
-	}
+		int imageButtonId = view.getId();
+		int fullImageId = FactoryUtil
+				.getFullScreenImageIdByButtonViewId(imageButtonId);
 
-	private Fragment createCardsFragment(int position) {
-		Fragment fragment;
-		if (position == Constants.FIBONACCI_POSITION) {
-			fragment = new FibonacciCardsFragment();
-		} else if (position == Constants.NUMERIC_POSITION) {
-			fragment = new NumericCardsFragment();
-		} else if (position == Constants.TSHIRT_POSITION) {
-			fragment = new TShirtSizeCardsFragment();
-		} else if (position == Constants.MANDAYS_POSITION) {
-			fragment = new ManDaysCardsFragment();
-		} else if (position == Constants.EVEN_POSITION) {
-			fragment = new EvenNumberCardsFragment();
-		} else {
-			fragment = new DummyCardsFragment();
-		}
-		return fragment;
+		Intent intent = new Intent(this, DisplayCardFullImageActivity.class);
+		intent.putExtra(Constants.CARD_FULL_IMAGE_ID, fullImageId);
+
+		startActivity(intent);
 	}
 
 }
